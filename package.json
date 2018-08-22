@@ -20,15 +20,16 @@
                 "command": "infiniteenigma.toggleWhitespace",
                 "title": "HtmlWhitespaceEliminatorToggle"
             }
+        ],
+        "keybindings": [
+            {
+              "command": "infiniteenigma.toggleWhitespace",
+              "key": "ctrl+shift+j",
+              "when": "editorTextFocus"
+            }
         ]
     },
-    "keybindings": [
-        {
-          "command": "infiniteenigma.toggleWhitespace",
-          "key": "ctrl+shift+j",
-          "when": "editorTextFocus"
-        }
-      ],
+    
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
