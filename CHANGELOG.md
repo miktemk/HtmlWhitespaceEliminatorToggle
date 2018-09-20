@@ -15,3 +15,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## 0.0.4
 - Hopefully actually fixed error with command not found
+
+## 0.0.5
+- fix handling for CRLF line endings

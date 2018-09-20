@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('infiniteenigma.toggleWhitespace', () => {
+    let disposable = vscode.commands.registerCommand('miktemk.toggleWhitespace', () => {
         // The code you place here will be executed every time your command is executed
         
         let textEditor = vscode.window.activeTextEditor;
@@ -25,20 +25,13 @@ export function activate(context: vscode.ExtensionContext) {
         
         let textDoc = textEditor.document;
         var curText = textDoc.getText();
-        function textState (testText : string) {
-            var searchCheck = curText.search(/>(\n\s*)</g);
-            if (searchCheck !== -1) {
-                return 1;
-            } else {
-                return 2;
-            }
-        }
-        var htmlState = textState(curText);
-        var newText : string;
-        if (htmlState === 1) {
-            newText = curText.replace(/>(\n\s*)</g, "$1><");
+        let newText : string;
+
+        // LINK: https://regex101.com/r/3reqL5/4
+        if (curText.search(/>(\r?\n\s*)</g) !== -1) {
+            newText = curText.replace(/>(\r?\n\s*)</g, "$1><");
         } else {
-            newText = curText.replace(/(\n\s*)></g, ">$1<");
+            newText = curText.replace(/(\r?\n\s*)></g, ">$1<");
         }
         //var r = new RegExp(">(\n\\s*)<", "g");
         const fullRange = new vscode.Range(
@@ -46,7 +39,6 @@ export function activate(context: vscode.ExtensionContext) {
             textDoc.positionAt(curText.length)
         );
         textEditor.edit(edit => edit.replace(fullRange, newText));
-        //https://regex101.com/r/3reqL5/1/
     });
 
     context.subscriptions.push(disposable);
